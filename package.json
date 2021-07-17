@@ -1,0 +1,79 @@
+{
+  "name": "scripts",
+  "version": "0.1.0",
+  "description": "Reusable scripts",
+  "main": "scripts.js",
+  "bin": {
+    "scripts": "./scripts.js"
+  },
+  "files": [
+    "dist",
+    "shell",
+    "python"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "mocha",
+    "coverage": "nyc npm test",
+    "coverage:check": "nyc --check-coverage npm test",
+    "prepare": "husky install",
+    "format:check": "prettier --check --ignore-unknown .",
+    "format": "prettier --write --ignore-unknown .",
+    "lint:check": "eslint **/*.{js,ts,tsx}",
+    "lint": "eslint --fix **/*.{js,ts,tsx}",
+    "qa": "sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_TOKEN} -Dsonar.organisation=committed -Dsonar.projectKey=commitd_${npm_package_name} -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info -Dsonar.test.inclusions=**/*.spec.* -Dsonar.test.exclusions=**/*.spec.* -Dsonar.github.pullRequest=$GITHUB_PR -Dsonar.github.oauth=$GITHUB_TOKEN",
+    "index": "ts-node-dev src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/commitd/scripts.git"
+  },
+  "keywords": [
+    "scripts",
+    "python",
+    "bash",
+    "npx"
+  ],
+  "author": "Committed <contact@committed.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/commitd/scripts/issues"
+  },
+  "homepage": "https://github.com/commitd/scripts#readme",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
+    "*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "bandersnatch": "^1.6.4",
+    "dayjs": "^1.10.6",
+    "execa": "^5.1.1",
+    "octokit": "^1.1.0",
+    "pino": "^6.12.0",
+    "pino-pretty": "^5.1.1"
+  },
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@tsconfig/node16": "^1.0.1",
+    "@types/chai": "^4.2.21",
+    "@types/chai-as-promised": "^7.1.4",
+    "@types/mocha": "^8.2.3",
+    "@types/pino": "^6.3.9",
+    "@types/sinon": "^10.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^7.30.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.0",
+    "mocha": "^8.4.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.3.2",
+    "sinon": "^11.1.1",
+    "sonarqube-scanner": "^2.8.1",
+    "ts-node": "^10.1.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  }
+}

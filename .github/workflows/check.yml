@@ -1,0 +1,48 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          cache: "npm"
+
+      - name: Install
+        run: npm install
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Check formatting
+        run: npm run lint:check
+
+      - name: Test with coverage
+        run: npm run coverage
+
+      # - name: Cache sonar
+      #   uses: actions/cache@v2
+      #   env:
+      #     cache-name: cache-sonar
+      #   with:
+      #     path: ~/.sonar
+      #     key: ${{ runner.os }}-${{ env.cache-name }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-${{ env.cache-name }}
+
+      # - name: QA
+      #   run: npm run qa

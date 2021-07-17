@@ -1,0 +1,36 @@
+name: Weekly summary
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Any time past midnight on Monday
+    - cron: "0 4 * * 1"
+
+jobs:
+  summarise:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Generate summary
+        run: |
+          ./daze.js sync --from $(date --date="7 days ago" +%Y-%m-%d) --to $(date +%Y-%m-%d)
+          ./daze.js summary
+        env:
+          GITHUB_APP_ID: ${{ secrets.DAZE_APP_ID }}
+          GITHUB_PRIVATE_KEY: ${{ secrets.DAZE_PRIVATE_KEY }}
+          GITHUB_INSTALLATION_ID: ${{ secrets.DAZE_INSTALLATION_ID }}
+
+        # TODO Output to MS Teams
