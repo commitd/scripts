@@ -6,6 +6,9 @@ on:
     branches:
       - latest
 
+# We need be able to write back to the repo
+permissions: write-all
+
 jobs:
   deploy-latest:
     runs-on: ubuntu-latest
