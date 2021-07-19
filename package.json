@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "description": "Reusable scripts",
   "main": "scripts.js",
-  "bin": {
-    "scripts": "./scripts.js"
-  },
+  "bin": "./scripts.js",
   "files": [
+    "scripts.js",
     "dist",
     "shell",
     "python"
   ],
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "mocha",
@@ -50,7 +52,8 @@
     "execa": "^5.1.1",
     "octokit": "^1.1.0",
     "pino": "^6.12.0",
-    "pino-pretty": "^5.1.1"
+    "pino-pretty": "^5.1.1",
+    "sonarqube-scanner": "^2.8.1"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
@@ -71,7 +74,6 @@
     "nyc": "^15.1.0",
     "prettier": "^2.3.2",
     "sinon": "^11.1.1",
-    "sonarqube-scanner": "^2.8.1",
     "ts-node": "^10.1.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
