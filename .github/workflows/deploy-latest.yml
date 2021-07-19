@@ -7,7 +7,7 @@ on:
       - latest
 
 jobs:
-  summarise:
+  deploy-latest:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
