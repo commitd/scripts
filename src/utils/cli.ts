@@ -3,10 +3,6 @@ import { logger } from "./logger"
 import { join } from "path"
 import { homedir } from "os"
 
-type StandardOptions = {
-  dryRun?: boolean
-}
-
 /**
  * Creates a new command with standard options
  *
