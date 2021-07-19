@@ -33,9 +33,13 @@ export const shellCommand = newCommand(
       options["script-arguments"].join(" ")
     )
     logger.debug("Command run from %s", scriptExecutable)
-    const r = await exec("bash", [
-      scriptExecutable,
-      ...options["script-arguments"],
-    ])
-    logger.info("Shell completed with exit code %d", r.exitCode)
+    if (options["dry-run"]) {
+      logger.info("DRY-RUN: Not running shell command")
+    } else {
+      const r = await exec("bash", [
+        scriptExecutable,
+        ...options["script-arguments"],
+      ])
+      logger.info("Shell completed with exit code %d", r.exitCode)
+    }
   })

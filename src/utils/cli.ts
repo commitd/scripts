@@ -14,24 +14,12 @@ type StandardOptions = {
  * @returns
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function newCommand(
-  name: string,
-  description: string,
-  options: StandardOptions = {
-    dryRun: false,
-  }
-) {
-  let c = command(name).description(description)
-
-  if (options.dryRun) {
-    c = c.option("dry-run", {
-      description: "Dry run mode - log but do not ac",
-      type: "boolean",
-      default: false,
-    })
-  }
-
-  return c
+export function newCommand(name: string, description: string) {
+  return command(name).description(description).option("dry-run", {
+    description: "Dry run mode - log but do not ac",
+    type: "boolean",
+    default: false,
+  })
 }
 
 export function launch(

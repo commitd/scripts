@@ -34,15 +34,19 @@ export const pythonCommand = newCommand(
     )
 
     if (pipRequirements) {
-      const pip = await exec("pip3", [
-        "-r",
-        pipRequirements,
-        // Try to work without interaction
-        "--exists-action",
-        "ignore",
-      ])
-      if (pip.exitCode !== 0) {
-        logger.warn("pip returns non-zero exist code %d", pip.exitCode)
+      if (!options["dry-run"]) {
+        logger.info("DRY-RUN: Found pip requirements, but not installing")
+      } else {
+        const pip = await exec("pip3", [
+          "-r",
+          pipRequirements,
+          // Try to work without interaction
+          "--exists-action",
+          "ignore",
+        ])
+        if (pip.exitCode !== 0) {
+          logger.warn("pip returns non-zero exist code %d", pip.exitCode)
+        }
       }
     }
 
@@ -52,9 +56,13 @@ export const pythonCommand = newCommand(
       options["script-arguments"].join(" ")
     )
     logger.debug("Command run from %s", scriptExecutable)
-    const r = await exec("python3", [
-      scriptExecutable,
-      ...options["script-arguments"],
-    ])
-    logger.info("Python completed with exit code %d", r.exitCode)
+    if (options["dry-run"]) {
+      logger.info("DRY-RUN: Not running python")
+    } else {
+      const r = await exec("python3", [
+        scriptExecutable,
+        ...options["script-arguments"],
+      ])
+      logger.info("Python completed with exit code %d", r.exitCode)
+    }
   })
