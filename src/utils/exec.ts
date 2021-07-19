@@ -1,9 +1,9 @@
 import execa from "execa"
 
 export type ExecOptions = {
-  env: NodeJS.ProcessEnv
+  env?: NodeJS.ProcessEnv
   // In millis
-  timeout: number
+  timeout?: number
   pipe: boolean
 }
 
@@ -27,27 +27,33 @@ export async function exec(
   const execaOptions: execa.Options<string> = {
     cleanup: true,
     extendEnv: true,
-    env: options.env,
-    timeout: options.timeout || 0,
+    env: options.env || DEFAULT_EXEC_OPTIONS.env,
+    timeout: options.timeout || DEFAULT_EXEC_OPTIONS.timeout,
+    // We want to get the exit code, not a JS error thrown
+    reject: false,
   }
 
   const e = execa(command, args, execaOptions)
-  if (e.stdout) {
-    e.stdout.pipe(process.stdout)
-  }
+  if (options.pipe) {
+    if (e.stdout) {
+      e.stdout.pipe(process.stdout)
+    }
 
-  if (e.stderr) {
-    e.stderr.pipe(process.stdin)
-  }
+    if (e.stderr) {
+      e.stderr.pipe(process.stdin)
+    }
 
-  if (e.stdin) {
-    process.stdin.pipe(e.stdin)
+    if (e.stdin) {
+      process.stdin.pipe(e.stdin)
+    }
   }
 
   const r = await e
 
-  if (e.stdin) {
-    process.stdin.unpipe(e.stdin)
+  if (options.pipe) {
+    if (e.stdin) {
+      process.stdin.unpipe(e.stdin)
+    }
   }
 
   return {

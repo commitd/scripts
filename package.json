@@ -22,7 +22,7 @@
     "lint:check": "eslint **/*.{js,ts,tsx}",
     "lint": "eslint --fix **/*.{js,ts,tsx}",
     "qa": "sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_TOKEN} -Dsonar.organisation=committed -Dsonar.projectKey=commitd_${npm_package_name} -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info -Dsonar.test.inclusions=**/*.spec.* -Dsonar.test.exclusions=**/*.spec.* -Dsonar.github.pullRequest=$GITHUB_PR -Dsonar.github.oauth=$GITHUB_TOKEN",
-    "index": "ts-node-dev src/index.ts"
+    "index": "ts-node-dev --files src/index.ts"
   },
   "repository": {
     "type": "git",
