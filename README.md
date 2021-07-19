@@ -6,26 +6,34 @@ Scripts which have utility across many repositories.
 
 Exact use depends on the script implementation language.
 
-If the script is npm then it can be run through npx.
+If the script is Node based (in the `src` directory) then it can be run through `npx`.
 
 ```bash
 # Assume you have NodeJS
 
 # Via npx
 
-npx github:commitd/scripts -c SCRIPT args
+npx github:commitd/scripts SCRIPT args
 
 # Via npm with clone:
 
 git clone https://github.com/commitd/scripts.git
 npm run SCRIPT
+
+# Or if you are developing a node project:
+
+npm install -D commitd/scripts
+npm exec scripts
+# Or with yarn:
+yarn add -D commitd/scripts
+yarn scripts
 ```
 
 If the script is Python then you will need to clone it and install requirements:
 
 ```bash
 # Use the npx shortcut
-npx github:commitd/scripts -c py SCRIPT
+npx github:commitd/scripts python SCRIPT
 
 
 # Or clone and use directly
@@ -74,10 +82,20 @@ We wish to minimize the number of dependencies (all of which need to be pulled i
 - Review the transitive dependencies you are added, what are they pulling in?
 - Do not introduce libraries niche requirements. If these are so niche, perhaps they project specific?
 
-## Bash scripts
+## Shell scripts
 
-- [Sharepoint upload](/sharepoint-upload): A Python script to upload files to Sharepoint (particularly to Committed External). This could be useful in GitHub Actions delivery pipelines.
-- [Save Docker Images](/save-docker-images): Save a list of Docker images, e.g. for upload to client.
-- [Export and Encrypt LastPass](./export-lastpass): Export your LastPass vault and encrypt it for backup.
+- [Example](/shell/example) an example hello world script just for testing.
+- [Save Docker Images](/shell/save-docker-images): Save a list of Docker images, e.g. for upload to client.
+- [Export and Encrypt LastPass](./shell/export-lastpass): Export your LastPass vault and encrypt it for backup.
+
+## Python scripts
+
+- [Example](/python/example) an example hello world script just for testing.
+- [Sharepoint upload](/python/sharepoint-upload): A Python script to upload files to Sharepoint (particularly to Committed External). This could be useful in GitHub Actions delivery pipelines.
 
 ## NodeJS scripts
+
+- [Example](/src/example-command) an example hello world script just for testing.
+- [Sonar](/src/sonar-command) run sonar analysis and uploads to SonarCloud supporting GitHub and workspaces.
+
+Note that under `src` are `python-command` and `shell-command` which run the Python and Shell scripts as above.
