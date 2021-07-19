@@ -1,0 +1,36 @@
+name: Deploy to latest
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - latest
+
+jobs:
+  summarise:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Commit to latest
+        # We need to allow the content of dist to be committed, so swap out the .gitignore
+        run: |
+          cp .latest-gitignore .gitignore
+          git config --global user.name 'Committed'
+          git config --global user.email 'commitd-bot@users.noreply.github.com'
+          git add .gitignore
+          git add dist
+          git commit -am "Deploy to latest"
+          git push
