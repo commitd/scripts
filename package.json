@@ -1,9 +1,12 @@
 {
-  "name": "scripts",
-  "version": "0.1.0",
+  "name": "commitd-scripts",
+  "version": "0.1.1",
   "description": "Reusable scripts",
   "main": "scripts.js",
-  "bin": "scripts.js",
+  "bin": {
+    "commitd-scripts": "scripts.js",
+    "scripts": "scripts.js"
+  },
   "files": [
     "scripts.js",
     "dist",
