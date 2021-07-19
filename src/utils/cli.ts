@@ -29,7 +29,11 @@ export function launch(
     historyFile: join(homedir(), `.commitd_script_${name}_history`),
     help: true,
     prompt: `@commitd/scripts ${name} > `,
-  })
+  }).default(
+    new Command("hello").action(() =>
+      logger.info("Welcome from Committed Scripts, use `help` to get started")
+    )
+  )
 
   for (const c of commands) {
     p.add(c)
