@@ -1,13 +1,14 @@
 {
   "name": "commitd-scripts",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Reusable scripts",
-  "main": "dist/index.js",
+  "main": "scripts.js",
   "bin": {
-    "commitd-scripts": "dist/index.js",
-    "scripts": "dist/index.js"
+    "commitd-scripts": "scripts.js",
+    "scripts": "scripts.js"
   },
   "files": [
+    "scripts.js",
     "dist",
     "shell",
     "python"
@@ -16,7 +17,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "dist": "tsc -p tsconfig.build.json",
     "test": "mocha",
     "coverage": "nyc npm test",
     "coverage:check": "nyc --check-coverage npm test",
@@ -26,7 +27,8 @@
     "lint:check": "eslint **/*.{js,ts,tsx}",
     "lint": "eslint --fix **/*.{js,ts,tsx}",
     "qa": "sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_TOKEN} -Dsonar.organisation=committed -Dsonar.projectKey=commitd_${npm_package_name} -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info -Dsonar.test.inclusions=**/*.spec.* -Dsonar.test.exclusions=**/*.spec.* -Dsonar.github.pullRequest=$GITHUB_PR -Dsonar.github.oauth=$GITHUB_TOKEN",
-    "index": "ts-node-dev --files src/index.ts"
+    "index": "ts-node-dev --files src/index.ts",
+    "prepublish": "npm run dist"
   },
   "repository": {
     "type": "git",

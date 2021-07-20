@@ -25,7 +25,7 @@ jobs:
       - name: Build
         run: |
           npm ci
-          npm run build
+          npm run dist
 
       - name: Commit to latest
         # We need to allow the content of dist to be committed, so swap out the .gitignore
