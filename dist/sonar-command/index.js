@@ -12,6 +12,7 @@ exports.sonarCommand = utils_1.newCommand("sonar", "Run a Sonar analysis and upl
     .argument("package-json", {
     description: "The package.json of the project (or root of the workspace)",
     type: "string",
+    optional: true,
     default: "./package.json",
 })
     .option("sonar-url", {
@@ -65,10 +66,11 @@ exports.sonarCommand = utils_1.newCommand("sonar", "Run a Sonar analysis and upl
     const packageJsonDirs = await findWorkspacePackageDirs(rootDir);
     const sourceDirs = findSourceDir(packageJsonDirs);
     const allTestExecutions = getTestExecutions(packageJsonDirs);
-    utils_1.logger.info(rootDir);
-    utils_1.logger.info(packageJsonDirs);
-    utils_1.logger.info(sourceDirs);
-    utils_1.logger.info(allTestExecutions);
+    utils_1.logger.debug(options["package-json"]);
+    utils_1.logger.debug(rootDir);
+    utils_1.logger.debug(packageJsonDirs);
+    utils_1.logger.debug(sourceDirs);
+    utils_1.logger.debug(allTestExecutions);
     const parameters = {
         serverUrl: options["sonar-url"],
         token: sonarToken,
@@ -117,7 +119,7 @@ exports.sonarCommand = utils_1.newCommand("sonar", "Run a Sonar analysis and upl
             ].join(","),
         },
     };
-    utils_1.logger.info(parameters);
+    utils_1.logger.debug("Parameters %o", parameters);
     if (options["dry-run"]) {
         utils_1.logger.info("DRY-RUN: Not running sonarqube scanner");
     }
