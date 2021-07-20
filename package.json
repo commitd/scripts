@@ -20,7 +20,6 @@
     "test": "mocha",
     "coverage": "nyc npm test",
     "coverage:check": "nyc --check-coverage npm test",
-    "prepare": "husky install",
     "format:check": "prettier --check --ignore-unknown .",
     "format": "prettier --write --ignore-unknown .",
     "lint:check": "eslint **/*.{js,ts,tsx}",
