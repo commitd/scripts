@@ -33,13 +33,14 @@ If the script is Python then you will need to clone it and install requirements:
 
 ```bash
 # Use the npx shortcut
-npx github:commitd/scripts python SCRIPT
+# Note the argument are in quotes!
+npx github:commitd/scripts python SCRIPT "your_arguments --your-options "
 
 
 # Or clone and use directly
 # Assume you have python3, pip3 and git!
 git clone https://github.com/commitd/scripts.git
-cd SCRIPT
+cd python/SCRIPT
 pip3 install -r requirements.txt
 ./SCRIPT.py
 ```
@@ -48,12 +49,13 @@ If the script is Python then you will need to clone it and install requirements:
 
 ```bash
 # Use via npx shortcut
-npx github:commitd/scripts -c shell SCRIPT
+# Note argument and options are in quotes
+npx github:commitd/scripts -c shell SCRIPT "your_arguments --your-options "
 
 # Or clone and run directly:
 
 git clone https://github.com/commitd/scripts.git
-cd SCRIPT
+cd bash/SCRIPT
 ./SCRIPT
 ```
 

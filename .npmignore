@@ -1,0 +1,7 @@
+node_modules/
+coverage/
+.nyc_output/
+.eslintcache
+*.pyc
+build/
+# Retain dist/ we need it as the compiled code

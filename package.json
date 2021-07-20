@@ -2,19 +2,18 @@
   "name": "commitd-scripts",
   "version": "0.1.1",
   "description": "Reusable scripts",
-  "main": "scripts.js",
+  "main": "dist/index.js",
   "bin": {
-    "commitd-scripts": "scripts.js",
-    "scripts": "scripts.js"
+    "commitd-scripts": "dist/index.js",
+    "scripts": "dist/index.js"
   },
   "files": [
-    "scripts.js",
     "dist",
     "shell",
     "python"
   ],
   "engines": {
-    "node": ">=16"
+    "node": ">=14"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
