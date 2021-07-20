@@ -10,6 +10,7 @@ export const sonarCommand = newCommand(
   .argument("package-json", {
     description: "The package.json of the project (or root of the workspace)",
     type: "string",
+    optional: true,
     default: "./package.json",
   })
   .option("sonar-url", {
@@ -70,10 +71,11 @@ export const sonarCommand = newCommand(
     const sourceDirs = findSourceDir(packageJsonDirs)
     const allTestExecutions = getTestExecutions(packageJsonDirs)
 
-    logger.info(rootDir)
-    logger.info(packageJsonDirs)
-    logger.info(sourceDirs)
-    logger.info(allTestExecutions)
+    logger.debug(options["package-json"])
+    logger.debug(rootDir)
+    logger.debug(packageJsonDirs)
+    logger.debug(sourceDirs)
+    logger.debug(allTestExecutions)
 
     const parameters = {
       serverUrl: options["sonar-url"],
@@ -124,7 +126,7 @@ export const sonarCommand = newCommand(
       },
     }
 
-    logger.info(parameters)
+    logger.debug("Parameters %o", parameters)
     if (options["dry-run"]) {
       logger.info("DRY-RUN: Not running sonarqube scanner")
     } else {
