@@ -40,7 +40,7 @@ export async function exec(
     }
 
     if (e.stderr) {
-      e.stderr.pipe(process.stdin)
+      e.stderr.pipe(process.stderr)
     }
 
     if (e.stdin) {

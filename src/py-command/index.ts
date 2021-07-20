@@ -34,15 +34,17 @@ export const pythonCommand = newCommand(
     )
 
     if (pipRequirements) {
-      if (!options["dry-run"]) {
+      if (options["dry-run"]) {
         logger.info("DRY-RUN: Found pip requirements, but not installing")
       } else {
         const pip = await exec("pip3", [
+          "install",
           "-r",
           pipRequirements,
           // Try to work without interaction
           "--exists-action",
-          "ignore",
+          // ignore
+          "i",
         ])
         if (pip.exitCode !== 0) {
           logger.warn("pip returns non-zero exist code %d", pip.exitCode)
