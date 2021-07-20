@@ -2,6 +2,13 @@
 
 Scripts which have utility across many repositories.
 
+This can be used either as a command `npx github:commitd/scripts command arguments --options` or you can use it interactively (REPL) by omitting the SCRIPT name `npx github:commitd/scripts`.
+
+Note that the `python` and `shell` commands have limitations in REPL mode. You must quote your options:
+
+- `npx github:commitd/scripts python script --option` when using command line.
+- but `npx github:commitd/scripts` then `python script "--option"` in REPL.
+
 ## Use
 
 Exact use depends on the script implementation language.
@@ -13,12 +20,7 @@ If the script is Node based (in the `src` directory) then it can be run through 
 
 # Via npx
 
-npx github:commitd/scripts SCRIPT args
-
-# Via npm with clone:
-
-git clone https://github.com/commitd/scripts.git
-npm run SCRIPT
+npx github:commitd/scripts command args
 
 # Or if you are developing a node project:
 
@@ -34,7 +36,7 @@ If the script is Python then you will need to clone it and install requirements:
 ```bash
 # Use the npx shortcut
 # Note the argument are in quotes!
-npx github:commitd/scripts python SCRIPT "your_arguments --your-options "
+npx github:commitd/scripts python SCRIPT
 
 
 # Or clone and use directly
@@ -50,7 +52,7 @@ If the script is Python then you will need to clone it and install requirements:
 ```bash
 # Use via npx shortcut
 # Note argument and options are in quotes
-npx github:commitd/scripts -c shell SCRIPT "your_arguments --your-options "
+npx github:commitd/scripts shell SCRIPT your_arguments --your-options
 
 # Or clone and run directly:
 
