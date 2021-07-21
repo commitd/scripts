@@ -1,5 +1,5 @@
 export { logger } from "./logger"
-export { launch, newCommand } from "./cli"
+export { newCommand } from "./cli"
 export { DEFAULT_EXEC_OPTIONS, ExecOptions, exec } from "./exec"
 export { findFileInPackage } from "./package"
 export * from "./constants"
