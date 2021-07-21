@@ -10,11 +10,10 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findFileInPackage = exports.exec = exports.DEFAULT_EXEC_OPTIONS = exports.newCommand = exports.launch = exports.logger = void 0;
+exports.findFileInPackage = exports.exec = exports.DEFAULT_EXEC_OPTIONS = exports.newCommand = exports.logger = void 0;
 var logger_1 = require("./logger");
 Object.defineProperty(exports, "logger", { enumerable: true, get: function () { return logger_1.logger; } });
 var cli_1 = require("./cli");
-Object.defineProperty(exports, "launch", { enumerable: true, get: function () { return cli_1.launch; } });
 Object.defineProperty(exports, "newCommand", { enumerable: true, get: function () { return cli_1.newCommand; } });
 var exec_1 = require("./exec");
 Object.defineProperty(exports, "DEFAULT_EXEC_OPTIONS", { enumerable: true, get: function () { return exec_1.DEFAULT_EXEC_OPTIONS; } });

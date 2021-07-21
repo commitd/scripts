@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pythonCommand = void 0;
+exports.runPython = exports.pythonCommand = void 0;
 const constants_1 = require("../utils/constants");
 const utils_1 = require("../utils");
 exports.pythonCommand = utils_1.newCommand("python", "Run a Python script from the @commitd/scripts repository. This assumes you have the python and pip3 installed.")
@@ -12,6 +12,9 @@ exports.pythonCommand = utils_1.newCommand("python", "Run a Python script from t
     variadic: true,
 })
     .action(async (options) => {
+    return runPython(options);
+});
+async function runPython(options) {
     utils_1.logger.debug(options);
     const scriptExecutable = utils_1.findFileInPackage(constants_1.PYTHON_DIR, options.script, `${options.script}.py`);
     if (!scriptExecutable) {
@@ -42,6 +45,7 @@ exports.pythonCommand = utils_1.newCommand("python", "Run a Python script from t
     utils_1.logger.debug("Command run from %s", scriptExecutable);
     if (options["dry-run"]) {
         utils_1.logger.info("DRY-RUN: Not running python");
+        return 0;
     }
     else {
         const r = await utils_1.exec("python3", [
@@ -49,5 +53,7 @@ exports.pythonCommand = utils_1.newCommand("python", "Run a Python script from t
             ...options["script-arguments"],
         ]);
         utils_1.logger.info("Python completed with exit code %d", r.exitCode);
+        return r.exitCode;
     }
-});
+}
+exports.runPython = runPython;

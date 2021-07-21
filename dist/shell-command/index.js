@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.shellCommand = void 0;
+exports.runShell = exports.shellCommand = void 0;
 const utils_1 = require("../utils");
 const constants_1 = require("../utils/constants");
 exports.shellCommand = utils_1.newCommand("shell", "Run a command @commitd/scripts in a shell. This assumes you have the bash shell.")
@@ -12,6 +12,9 @@ exports.shellCommand = utils_1.newCommand("shell", "Run a command @commitd/scrip
     variadic: true,
 })
     .action(async (options) => {
+    return runShell(options);
+});
+async function runShell(options) {
     utils_1.logger.debug(options);
     const scriptExecutable = utils_1.findFileInPackage(constants_1.SHELL_DIR, options.script, `${options.script}.sh`);
     if (!scriptExecutable) {
@@ -22,6 +25,7 @@ exports.shellCommand = utils_1.newCommand("shell", "Run a command @commitd/scrip
     utils_1.logger.debug("Command run from %s", scriptExecutable);
     if (options["dry-run"]) {
         utils_1.logger.info("DRY-RUN: Not running shell command");
+        return 0;
     }
     else {
         const r = await utils_1.exec("bash", [
@@ -29,5 +33,7 @@ exports.shellCommand = utils_1.newCommand("shell", "Run a command @commitd/scrip
             ...options["script-arguments"],
         ]);
         utils_1.logger.info("Shell completed with exit code %d", r.exitCode);
+        return r.exitCode;
     }
-});
+}
+exports.runShell = runShell;
