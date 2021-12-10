@@ -80,7 +80,7 @@ if __name__ == "__main__":
         '--chunkSize',
         type=int,
         help='The chunksize to use when uploading',
-        default=1000000)
+        default=100000000)
 
     args = parser.parse_args()
     clientId = args.clientId or os.environ.get('CLIENT_ID')
